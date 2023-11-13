@@ -53,15 +53,15 @@ jobs:
         APPLE_STORE_AUTH_KEY_ID: ${{ secrets.APPLE_STORE_AUTH_KEY_ID }}
         APPLE_STORE_AUTH_KEY_ISSUER_ID: ${{ secrets.APPLE_STORE_AUTH_KEY_ISSUER_ID }}
       run: xcrun xcodebuild \
-        -project ${XC_PROJECT} \
-        -scheme ${XC_SCHEME} \
-        -destination "${XC_DESTINATION}" \
-        -configuration ${XC_CONFIG} \
+        -project $XC_PROJECT \
+        -scheme $XC_SCHEME \
+        -destination "$XC_DESTINATION" \
+        -configuration $XC_CONFIG \
         -onlyUsePackageVersionsFromResolvedFile \
         -derivedDataPath $PWD/build \
         -allowProvisioningUpdates \
-        -authenticationKeyPath ${STORE_AUTH_KEY} \
-        -authenticationKeyID ${APPLE_STORE_AUTH_KEY_ID} \
-        -authenticationKeyIssuerID ${APPLE_STORE_AUTH_KEY_ISSUER_ID} \
+        -authenticationKeyPath $STORE_AUTH_KEY \
+        -authenticationKeyID $APPLE_STORE_AUTH_KEY_ID \
+        -authenticationKeyIssuerID $APPLE_STORE_AUTH_KEY_ISSUER_ID \
         -verbose \
         build

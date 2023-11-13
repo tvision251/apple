@@ -45,12 +45,11 @@ jobs:
     - name: Prepare Xcode
       run: xcrun xcodebuild -checkFirstLaunchStatus || xcrun xcodebuild -runFirstLaunch
     - name: Dump build settings
-      run: xcrun xcodebuild -project Kiwix.xcodeproj -scheme Kiwix -showBuildSettings
+      run: xcrun xcodebuild -project $XC_PROJECT -scheme $XC_SCHEME -showBuildSettings
     - name: Copy Key file to disk
       run: echo "${{ secrets.APPLE_STORE_AUTH_KEY }}" > ${STORE_AUTH_KEY} && chmod 600 ${STORE_AUTH_KEY}
     - name: Build for ${{ matrix.destination.platform }}/${{ matrix.destination.name }}
       env:
         APPLE_STORE_AUTH_KEY_ID: ${{ secrets.APPLE_STORE_AUTH_KEY_ID }}
         APPLE_STORE_AUTH_KEY_ISSUER_ID: ${{ secrets.APPLE_STORE_AUTH_KEY_ISSUER_ID }}
-      run: xcrun xcodebuild -project $XC_PROJECT -scheme $XC_SCHEME -destination "$XC_DESTINATION" -configuration $XC_CONFIG -onlyUsePackageVersionsFromResolvedFile -derivedDataPath $PWD/build -allowProvisioningUpdates -authenticationKeyPath $STORE_AUTH_KEY -authenticationKeyID $APPLE_STORE_AUTH_KEY_ID -authenticationKeyIssuerID $APPLE_STORE_AUTH_KEY_ISSUER_ID -verbose \
-        build
+      run: xcrun xcodebuild -project $XC_PROJECT -scheme $XC_SCHEME -destination "$XC_DESTINATION" -configuration $XC_CONFIG -onlyUsePackageVersionsFromResolvedFile -derivedDataPath $PWD/build -allowProvisioningUpdates -authenticationKeyPath $STORE_AUTH_KEY -authenticationKeyID $APPLE_STORE_AUTH_KEY_ID -authenticationKeyIssuerID $APPLE_STORE_AUTH_KEY_ISSUER_ID -verbose build

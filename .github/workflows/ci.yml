@@ -47,7 +47,7 @@ jobs:
     - name: Dump build settings
       run: xcrun xcodebuild -project Kiwix.xcodeproj -scheme Kiwix -showBuildSettings
     - name: Copy Key file to disk
-      run: echo "%{{ secrets.APPLE_STORE_AUTH_KEY }}" > ${STORE_AUTH_KEY} && chmod 600 ${STORE_AUTH_KEY}
+      run: echo "${{ secrets.APPLE_STORE_AUTH_KEY }}" > ${STORE_AUTH_KEY} && chmod 600 ${STORE_AUTH_KEY}
     - name: Build for ${{ matrix.destination.platform }}/${{ matrix.destination.name }}
       env:
         APPLE_STORE_AUTH_KEY_ID: ${{ secrets.APPLE_STORE_AUTH_KEY_ID }}
